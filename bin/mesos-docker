@@ -42,10 +42,10 @@ def read_cid():
 
 log    = logging.getLogger(os.path.basename(sys.argv[0]))
 log.setLevel(logging.DEBUG)
-syslog = logging.handlers.SysLogHandler(address = '/dev/log')
-syslog_format = logging.Formatter("%(name)s[%(process)d]: %(message)s")
-syslog.setFormatter(syslog_format)
-log.addHandler(syslog)
+stdout = logging.StreamHandler(sys.stdout)
+stdout_format = logging.Formatter("%(name)s[%(process)d]: %(message)s")
+stdout.setFormatter(stdout_format)
+log.addHandler(stdout)
 
 class DockerExecutor(mesos.Executor):
     def __init__(self, args):
